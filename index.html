@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mm Meal | Delicious Food Delivered</title>
+
+<meta name="description" content="Welcome to Mm Meal. Browse delicious meals, order your favourites and contact us on WhatsApp.">
+
+<style>
+:root {
+  --orange: #ef4b16;
+  --dark: #202020;
+  --cream: #fff8f2;
+  --green: #16834a;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  color: var(--dark);
+  background: var(--white);
+  line-height: 1.6;
+}
+
+button, input, textarea, select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 5%;
+  background: white;
+  box-shadow: 0 2px 12px #00000012;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  flex-wrap: wrap;
+}
+
+.logo {
+  color: var(--orange);
+  font-size: 27px;
+  font-weight: 900;
+}
+
+.logo span {
+  color: var(--dark);
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--dark);
+  font-weight: bold;
+}
+
+.cart-button,
+.primary-button {
+  background: var(--orange);
+  color: white;
+  border: none;
+  padding: 11px 16px;
+  border-radius: 7px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.hero {
+  min-height: 440px;
+  display: flex;
+  align-items: center;
+  padding: 55px 7%;
+  color: white;
+  background:
+    linear-gradient(90deg, #160d0bed, #160d0b35),
+    url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1600&q=85")
+    center/cover;
+}
+
+.hero-content {
+  max-width: 600px;
+}
+
+.hero h1 {
+  font-size: clamp(38px, 7vw, 65px);
+  line-height: 1.12;
+  margin-bottom: 18px;
+}
+
+.hero p {
+  font-size: 18px;
+  margin-bottom: 25px;
+}
+
+.section {
+  padding: 50px 5%;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.section-description {
+  text-align: center;
+  color: #777;
+  margin-bottom: 28px;
+}
+
+.categories {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.category-button {
+  padding: 9px 17px;
+  border: none;
+  border-radius: 25px;
+  background: #eee;
+}
+
+.category-button.active {
+  background: var(--orange);
+  color: white;
+}
+
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.food-card {
+  border-radius: 13px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px #00000012;
+  display: flex;
+  flex-direction: column;
+  background: white;
+}
+
+.food-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background: #eee;
+}
+
+.food-info {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.food-info h3 {
+  font-size: 19px;
+}
+
+.food-info p {
+  color: #777;
+  font-size: 14px;
+  margin: 7px 0 14px;
+  flex: 1;
+}
+
+.food-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.price {
+  color: var(--orange);
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.add-button {
+  border: none;
+  background: var(--dark);
+  color: white;
+  padding: 9px 12px;
+  border-radius: 6px;
+}
+
+.add-button:hover {
+  background: var(--orange);
+}
+
+.about {
+  background: var(--cream);
+  text-align: center;
+}
+
+.about p {
+  max-width: 700px;
+  margin: 15px auto;
+}
+
+.order-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  align-items: start;
+}
+
+.panel {
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 22px;
+  box-shadow: 0 4px 18px #00000008;
+  min-width: 0;
+}
+
+.panel h3 {
+  margin-bottom: 15px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.cart-item-name {
+  font-weight: bold;
+}
+
+.cart-item-price {
+  font-size: 13px;
+  color: #777;
+}
+
+.quantity {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.quantity button {
+  border: none;
+  border-radius: 4px;
+  width: 28px;
+  height: 28px;
+  background: #eee;
+}
+
+.remove-button {
+  border: none;
+  background: none;
+  color: #c00;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.empty-cart {
+  color: #777;
+  padding: 12px 0;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 0;
+}
+
+.grand-total {
+  border-top: 2px solid #eee;
+  margin-top: 8px;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.payment-box {
+  margin-top: 20px;
+  padding: 17px;
+  background: #fff7e8;
+  border: 1px solid #f3d49a;
+  border-radius: 9px;
+}
+
+.payment-box h3 {
+  margin-bottom: 10px;
+}
+
+.account-number {
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  overflow-wrap: anywhere;
+}
+
+.copy-button {
+  margin-top: 10px;
+  background: var(--dark);
+  color: white;
+  padding: 9px 13px;
+  border: none;
+  border-radius: 6px;
+}
+
+.payment-note {
+  margin-top: 12px;
+  font-size: 13px;
+  color: #5e4b2d;
+}
+
+form label {
+  display: block;
+  margin: 13px 0 5px;
+  font-weight: bold;
+}
+
+form input,
+form textarea,
+form select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  background: white;
+}
+
+form textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.check-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin-top: 18px;
+  font-size: 14px;
+}
+
+.check-row input {
+  width: auto;
+  margin-top: 5px;
+}
+
+.check-row label {
+  margin: 0;
+  font-weight: normal;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 18px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  background: var(--green);
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.submit-button:hover {
+  background: #106638;
+}
+
+.small-note {
+  font-size: 12px;
+  color: #777;
+  margin-top: 10px;
+}
+
+footer {
+  text-align: center;
+  padding: 35px 15px;
+  background: #1c1c1c;
+  color: white;
+}
+
+footer p {
+  color: #ccc;
+  margin-top: 8px;
+}
+
+@media (max-width: 750px) {
+  header {
+    padding: 12px 4%;
+  }
+
+  .logo {
+    font-size: 24px;
+  }
+
+  nav {
+    gap: 10px;
+    font-size: 13px;
+  }
+
+  .hero {
+    min-height: 370px;
+    padding: 40px 6%;
+  }
+
+  .section {
+    padding: 38px 4%;
+  }
+
+  .food-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .food-card img {
+    height: 145px;
+  }
+
+  .food-info {
+    padding: 11px;
+  }
+
+  .food-info h3 {
+    font-size: 16px;
+  }
+
+  .food-bottom {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .add-button {
+    width: 100%;
+  }
+
+  .order-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .panel {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 350px) {
+  .food-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Mm <span>Meal</span></div>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#menu">Menu</a>
+    <a href="#about">About</a>
+  </nav>
+
+  <button class="cart-button" onclick="goToCart()">
+    🛒 Cart (<span id="cart-count">0</span>)
+  </button>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-content">
+    <h1>Good Food.<br>Good Mood.</h1>
+
+    <p>
+      Welcome to Mm Meal! Discover delicious food,
+      choose your favourites and order from the comfort
+      of your home.
+    </p>
+
+    <a class="primary-button" href="#menu">Explore Our Menu →</a>
+  </div>
+</section>
+
+<section class="section" id="menu">
+  <h2 class="section-title">Our Delicious Menu</h2>
+
+  <p class="section-description">
+    Choose your favourite meals and add them to your cart.
+  </p>
+
+  <div class="categories">
+    <button class="category-button active"
+      onclick="filterFood('All', this)">All</button>
+
+    <button class="category-button"
+      onclick="filterFood('Rice', this)">Rice</button>
+
+    <button class="category-button"
+      onclick="filterFood('Chicken', this)">Chicken</button>
+
+    <button class="category-button"
+      onclick="filterFood('Fast Food', this)">Fast Food</button>
+
+    <button class="category-button"
+      onclick="filterFood('Drinks', this)">Drinks</button>
+  </div>
+
+  <div class="food-grid" id="food-grid"></div>
+</section>
+
+<section class="section about" id="about">
+  <h2 class="section-title">About Mm Meal</h2>
+
+  <p>
+    At Mm Meal, we want ordering food to be simple and convenient.
+    Browse our menu, select your meals, provide your delivery
+    details and send your order directly to us through WhatsApp.
+  </p>
+</section>
+
+<section class="section" id="checkout">
+  <h2 class="section-title">Your Order</h2>
+
+  <p class="section-description">
+    Review your meals, view our payment details and complete
+    your order.
+  </p>
+
+  <div class="order-layout">
+
+    <div class="panel" id="cart-panel">
+      <h3>🛒 Shopping Cart</h3>
+
+      <div id="cart-items">
+        <p class="empty-cart">
+          Your cart is empty. Choose a meal from the menu.
+        </p>
+      </div>
+
+      <div class="total-row">
+        <span>Subtotal</span>
+        <strong id="subtotal">₦0</strong>
+      </div>
+
+      <div class="total-row">
+        <span>Delivery fee</span>
+        <strong id="delivery">To be confirmed</strong>
+      </div>
+
+      <div class="total-row grand-total">
+        <span>Food total</span>
+        <span id="total">₦0</span>
+      </div>
+
+      <p class="small-note">
+        The total covers food only. Confirm any delivery charge
+        with Mm Meal before transferring money.
+      </p>
+
+      <div class="payment-box">
+        <h3>🏦 Mm Meal Payment Details</h3>
+
+        <p><strong>Bank:</strong> Smart Cash</p>
+        <p><strong>Account name:</strong> Akeem Adeola</p>
+        <p><strong>Account number:</strong></p>
+
+        <div class="account-number" id="account-number">
+          9049647270
+        </div>
+
+        <button class="copy-button" onclick="copyAccount()">
+          Copy Account Number
+        </button>
+
+        <p class="payment-note">
+          Transfer the food total shown above. If delivery charges
+          apply, confirm the final amount with Mm Meal first.
+          Your order will only be accepted after payment is
+          verified by Mm Meal.
+        </p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>📍 Delivery Details</h3>
+
+      <form id="checkout-form">
+
+        <label for="customer-name">Full Name</label>
+        <input id="customer-name" type="text"
+          placeholder="Enter your full name" required>
+
+        <label for="customer-phone">Phone Number</label>
+        <input id="customer-phone" type="tel"
+          placeholder="Enter your phone number" required>
+
+        <label for="customer-address">Delivery Address</label>
+        <textarea id="customer-address"
+          placeholder="Enter your complete delivery address"
+          required></textarea>
+
+        <label for="customer-area">Delivery Area</label>
+        <input id="customer-area" type="text"
+          placeholder="e.g. Epe, Lekki, Lagos" required>
+
+        <label for="payment-method">Payment Method</label>
+        <select id="payment-method" required>
+          <option value="Bank Transfer">Bank Transfer</option>
+        </select>
+
+        <label for="customer-note">Additional Instructions</label>
+        <textarea id="customer-note"
+          placeholder="Optional delivery instructions"></textarea>
+
+        <div class="check-row">
+          <input type="checkbox" id="payment-confirmation" required>
+
+          <label for="payment-confirmation">
+            I understand that Mm Meal must verify my payment
+            before accepting my order.
+          </label>
+        </div>
+
+        <button class="submit-button" type="submit">
+          Send Order to WhatsApp
+        </button>
+
+        <p class="small-note">
+          This website does not verify payments automatically.
+          WhatsApp will open with your order prepared. Tap Send
+          in WhatsApp to deliver the message to Mm Meal.
+        </p>
+
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="logo">Mm Meal</div>
+  <p>Good Food. Good Mood.</p>
+  <p>Contact: 09049647270</p>
+  <p>© <span id="year"></span> Mm Meal. All rights reserved.</p>
+</footer>
+
+<script>
+"use strict";
+
+/*
+  Mm Meal configuration.
+  WhatsApp uses the international format without the leading zero.
+*/
+const WHATSAPP_NUMBER = "2349049647270";
+const ACCOUNT_NUMBER = "9049647270";
+
+const foods = [
+  {
+    id: 1,
+    name: "Jollof Rice",
+    category: "Rice",
+    price: 3500,
+    description: "Delicious Nigerian-style jollof rice.",
+    image: "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    id: 2,
+    name: "Fried Rice",
+    category: "Rice",
+    price: 4000,
+    description: "Tasty rice prepared with vegetables.",
+    image: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    id: 3,
+    name: "Grilled Chicken",
+    category: "Chicken",
+    price: 5000,
+    description: "Juicy and well-seasoned grilled chicken.",
+    image: "https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    id: 4,
+    name: "Beef Burger",
+    category: "Fast Food",
+    price: 4500,
+    description: "A delicious burger for any time of day.",
+    image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    id: 5,
+    name: "Pizza",
+    category: "Fast Food",
+    price: 7000,
+    description: "Cheesy pizza made for sharing.",
+    image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    id: 6,
+    name: "Chicken and Chips",
+    category: "Chicken",
+    price: 5500,
+    description: "Crispy chips served with chicken.",
+    image: "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    id: 7,
+    name: "Pancakes",
+    category: "Fast Food",
+    price: 2500,
+    description: "Soft and fluffy pancakes.",
+    image: "https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    id: 8,
+    name: "Fresh Juice",
+    category: "Drinks",
+    price: 1500,
+    description: "A refreshing drink to accompany your meal.",
+    image: "https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    id: 9,
+    name: "Rice and Chicken",
+    category: "Rice",
+    price: 6000,
+    description: "A satisfying rice and chicken combination.",
+    image: "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=700&q=80"
+  }
+];
+
+/*
+  Cart format:
+  {
+    foodId: quantity
+  }
+*/
+let cart = {};
+let currentCategory = "All";
+
+function formatMoney(amount) {
+  return "₦" + amount.toLocaleString("en-NG");
+}
+
+function renderFoods() {
+  const grid = document.getElementById("food-grid");
+
+  const visibleFoods = foods.filter(food =>
+    currentCategory === "All" ||
+    food.category === currentCategory
+  );
+
+  grid.innerHTML = visibleFoods.map(food => `
+    <article class="food-card">
+      <img
+        src="${food.image}"
+        alt="${food.name}"
+        loading="lazy"
+        onerror="this.onerror=null;this.src='https://placehold.co/600x400?text=Mm+Meal';"
+      >
+
+      <div class="food-info">
+        <h3>${food.name}</h3>
+
+        <p>${food.description}</p>
+
+        <div class="food-bottom">
+          <span class="price">${formatMoney(food.price)}</span>
+
+          <button
+            class="add-button"
+            onclick="addToCart(${food.id})"
+          >
+            + Add
+          </button>
+        </div>
+      </div>
+    </article>
+  `).join("");
+}
+
+function filterFood(category, button) {
+  currentCategory = category;
+
+  document.querySelectorAll(".category-button").forEach(item => {
+    item.classList.remove("active");
+  });
+
+  button.classList.add("active");
+  renderFoods();
+}
+
+function addToCart(foodId) {
+  if (!foods.some(food => food.id === foodId)) {
+    return;
+  }
+
+  cart[foodId] = (cart[foodId] || 0) + 1;
+
+  renderCart();
+}
+
+function increaseQuantity(foodId) {
+  cart[foodId] = (cart[foodId] || 0) + 1;
+  renderCart();
+}
+
+function decreaseQuantity(foodId) {
+  if (!cart[foodId]) {
+    return;
+  }
+
+  cart[foodId]--;
+
+  if (cart[foodId] <= 0) {
+    delete cart[foodId];
+  }
+
+  renderCart();
+}
+
+function removeFromCart(foodId) {
+  delete cart[foodId];
+  renderCart();
+}
+
+function getCartItems() {
+  return Object.entries(cart)
+    .map(([id, quantity]) => {
+      const food = foods.find(item => item.id === Number(id));
+
+      if (!food || quantity <= 0) {
+        return null;
+      }
+
+      return {
+        ...food,
+        quantity,
+        lineTotal: food.price * quantity
+      };
+    })
+    .filter(Boolean);
+}
+
+function getCartTotal() {
+  return getCartItems().reduce(
+    (sum, item) => sum + item.lineTotal,
+    0
+  );
+}
+
+function getCartQuantity() {
+  return Object.values(cart).reduce(
+    (sum, quantity) => sum + quantity,
+    0
+  );
+}
+
+function renderCart() {
+  const cartItemsElement = document.getElementById("cart-items");
+  const items = getCartItems();
+
+  document.getElementById("cart-count").textContent =
+    getCartQuantity();
+
+  if (items.length === 0) {
+    cartItemsElement.innerHTML = `
+      <p class="empty-cart">
+        Your cart is empty. Choose a meal from the menu.
+      </p>
+    `;
+  } else {
+    cartItemsElement.innerHTML = items.map(item => `
+      <div class="cart-item">
+        <div>
+          <div class="cart-item-name">${item.name}</div>
+
+          <div class="cart-item-price">
+            ${formatMoney(item.price)} each
+          </div>
+
+          <button
+            class="remove-button"
+            onclick="removeFromCart(${item.id})"
+          >
+            Remove
+          </button>
+        </div>
+
+        <div class="quantity">
+          <button
+            type="button"
+            aria-label="Decrease ${item.name} quantity"
+            onclick="decreaseQuantity(${item.id})"
+          >−</button>
+
+          <strong>${item.quantity}</strong>
+
+          <button
+            type="button"
+            aria-label="Increase ${item.name} quantity"
+            onclick="increaseQuantity(${item.id})"
+          >+</button>
+        </div>
+
+        <strong>${formatMoney(item.lineTotal)}</strong>
+      </div>
+    `).join("");
+  }
+
+  const total = getCartTotal();
+
+  document.getElementById("subtotal").textContent =
+    formatMoney(total);
+
+  document.getElementById("total").textContent =
+    formatMoney(total);
+}
+
+function goToCart() {
+  document.getElementById("checkout").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+async function copyAccount() {
+  try {
+    await navigator.clipboard.writeText(ACCOUNT_NUMBER);
+    alert("Account number copied: " + ACCOUNT_NUMBER);
+  } catch (error) {
+    // Fallback for browsers where clipboard access is unavailable.
+    const temporaryInput = document.createElement("textarea");
+
+    temporaryInput.value = ACCOUNT_NUMBER;
+    temporaryInput.style.position = "fixed";
+    temporaryInput.style.opacity = "0";
+
+    document.body.appendChild(temporaryInput);
+    temporaryInput.select();
+
+    const copied = document.execCommand("copy");
+
+    temporaryInput.remove();
+
+    if (copied) {
+      alert("Account number copied: " + ACCOUNT_NUMBER);
+    } else {
+      alert("Please copy the account number manually: " + ACCOUNT_NUMBER);
+    }
+  }
+}
+
+document.getElementById("checkout-form").addEventListener(
+  "submit",
+  function(event) {
+    event.preventDefault();
+
+    const items = getCartItems();
+
+    if (items.length === 0) {
+      alert("Your cart is empty. Please select at least one meal.");
+      return;
+    }
+
+    const customerName =
+      document.getElementById("customer-name").value.trim();
+
+    const customerPhone =
+      document.getElementById("customer-phone").value.trim();
+
+    const customerAddress =
+      document.getElementById("customer-address").value.trim();
+
+    const customerArea =
+      document.getElementById("customer-area").value.trim();
+
+    const paymentMethod =
+      document.getElementById("payment-method").value;
+
+    const customerNote =
+      document.getElementById("customer-note").value.trim();
+
+    const confirmed =
+      document.getElementById("payment-confirmation").checked;
+
+    if (
+      !customerName ||
+      !customerPhone ||
+      !customerAddress ||
+      !customerArea
+    ) {
+      alert("Please complete all required customer details.");
+      return;
+    }
+
+    if (!confirmed) {
+      alert("Please confirm that you understand the payment process.");
+      return;
+    }
+
+    const total = getCartTotal();
+
+    const orderLines = items.map(item =>
+      `${item.name} x ${item.quantity} = ${formatMoney(item.lineTotal)}`
+    );
+
+    const message = [
+      "🍽️ *NEW ORDER — MM MEAL*",
+      "",
+      "*Customer Details*",
+      "Name: " + customerName,
+      "Phone: " + customerPhone,
+      "Delivery address: " + customerAddress,
+      "Delivery area: " + customerArea,
+      "",
+      "*Order Items*",
+      ...orderLines,
+      "",
+      "*Food Total: " + formatMoney(total) + "*",
+      "Delivery fee: To be confirmed",
+      "Payment method: " + paymentMethod,
+      "",
+      "*Bank Transfer Details*",
+      "Bank: Smart Cash",
+      "Account name: Akeem Adeola",
+      "Account number: " + ACCOUNT_NUMBER,
+      "",
+      "Additional instructions: " + (customerNote || "None"),
+      "",
+      "Please verify payment before accepting this order.",
+      "",
+      "Order submitted through the Mm Meal website."
+    ].join("\n");
+
+    const whatsappURL =
+      "https://wa.me/" + WHATSAPP_NUMBER +
+      "?text=" + encodeURIComponent(message);
+
+    window.open(whatsappURL, "_blank");
+  }
+);
+
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+
+renderFoods();
+renderCart();
+</script>
+
+</body>
+  </html>
